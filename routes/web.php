@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CitasController;
 use App\Http\Controllers\Admin\CitasMantenimientoController;
-
+use App\Http\Controllers\Admin\NotasController;
+use App\Http\Controllers\Admin\PersonaController;
+use App\Http\Controllers\Admin\CarpetasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,19 @@ use App\Http\Controllers\Admin\CitasMantenimientoController;
 */
 
 Route::get('/', [App\Http\Controllers\Admin\CitasController::class, 'index']);
+
+Route::get('/notas', [App\Http\Controllers\Admin\NotasController::class, 'index']);
+
+Route::get('/crear-nota/{id}', [App\Http\Controllers\Admin\NotasController::class, 'crearNota'])->name('crearNota');
+
+Route::get('/notas/{id}', [App\Http\Controllers\Admin\NotasController::class, 'verNotas'])->name('verNotas');
+
+Route::get('/nota/{id}', [App\Http\Controllers\Admin\NotasController::class, 'show'])->name('showNotas');
+
+Route::get('/crear-paciente', [App\Http\Controllers\Admin\PersonaController::class, 'create'])->name('crearPersona');
+
+Route::get('/expediente/{id?}', [App\Http\Controllers\Admin\CarpetasController::class, 'index'])->name('carpetaIndex');
+Route::post('/expediente/media', [CarpetasController::class, 'storeMedia'])->name('carpetaStoreMedia');
 
 Auth::routes();
 

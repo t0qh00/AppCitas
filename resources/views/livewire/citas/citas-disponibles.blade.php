@@ -51,26 +51,40 @@
                                 <td>{{ $citaSeleccionada }}</td>
                             </tr>
                             <tr>
+                                <td><b><label for="cedula">Cédula:</label></b></td>
+                                <td><input wire:model="dni" id="cedula" type="number" required></td>
+                            </tr>
+                            <tr>
                                 <td><b><label for="name">Nombre:</label></b></td>
-                                <td><input type="text" id="name" required wire:model="nombre"></td>
+                                <td><input type="text" id="name" wire:model="nombre" required></td>
                             </tr>
                             <tr>
                                 <td><b><label for="email">Email:</label></b></td>
-                                <td><input type="email" id="email" required wire:model="correo"></td>
+                                <td><input type="email" id="email" wire:model="correo" required></td>
                             </tr>
                             <tr>
                                 <td><b><label for="phone">Teléfono:</label></b></td>
-                                <td><input type="phone" id="phone" required wire:model="telefono"></td>
+                                <td><input type="number" id="phone" wire:model="telefono" required></td>
+                            </tr>
+                            <tr>
+                                <td><b><label for="virtual">Es virtual?</label></b></td>
+                                <td><input wire:model="isOnline" id="virtual" type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td><b><label for="reason">Motivo de la consulta?</label></b></td>
+                                <td><textarea wire:model="reason" name="reason" id="reason" cols="30" rows="10" required></textarea></td>
                             </tr>
                         </tbody>
                     </table>
                     <br>
-                    <button class="button-citas-custom" onclick="selectDate()">
+                    <div style="color: red">{{$error}}</div>
+                    <br>
+                    <a class="button-citas-custom" onclick="selectDate()">
                         Finalizar
-                    </button>
-                    <button class="button-citas-custom" onclick="closeModal()">
+                    </a>
+                    <a href="" class="button-citas-custom" onclick="closeModal()">
                         Cancelar
-                    </button>
+                    </a>
                 </form>
             </div>
         </div>

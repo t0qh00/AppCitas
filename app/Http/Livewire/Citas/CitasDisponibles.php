@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Citas;
 
 use App\Models\Citas;
+use App\Models\Persona;
 use Carbon\Carbon;
 use Livewire\Component;
 use Ramsey\Uuid\Type\Integer;
@@ -24,6 +25,10 @@ class CitasDisponibles extends Component
     public $nombre;
     public $correo;
     public $telefono;
+    public $isOnline;
+    public $reason;
+    public $dni;
+    public $error;
     public $hidden = 'hidden';
 
     public function mount(Citas $citas)
@@ -38,6 +43,7 @@ class CitasDisponibles extends Component
         $this->correo = "";
         $this->telefono = "";
         $this->nombre = "";
+        $this->isOnline = 0;
     }
 
     public function render()
@@ -82,7 +88,7 @@ class CitasDisponibles extends Component
     }
 
     public function citaSeleccionada(){
-        if($this->nombre != '' && $this->telefono != '' && $this->correo != ''){
+        if($this->nombre != '' && $this->telefono != '' && $this->correo != '' && $this->dni != '' && $this->reason){
             $cita = new Citas();
             $cita->nombre = $this->nombre;
             $cita->telefono = $this->telefono;
@@ -91,8 +97,22 @@ class CitasDisponibles extends Component
             $cita->hora_entrada = (Integer) $this->citaSeleccionada;
             $cita->hora_salida = (Integer) $this->citaSeleccionada + 1;
             $cita->tiempo_del_dia = $this->tiempoDelDia;
+            $cita->virtual = $this->isOnline;
+            $cita->motivo = $this->reason;
             $cita->save();
+
+            $personaExist = Persona::where('cedula',$this->dni)->first();
+            if(!$personaExist){
+                $persona = new Persona();
+                $persona->cedula = $this->dni;
+                $persona->correo = $this->correo;
+                $persona->telefono = $this->telefono;
+                $persona->nombre_completo = $this->nombre;
+                $persona->save();
+            }
             return redirect('/reserva-completada');
+        }else{
+            $this->error = "*Todos los campos son requeridos";
         }
     }
 
@@ -127,7 +147,7 @@ class CitasDisponibles extends Component
                 'required'
             ],
             'citas.correo' => [
-                'email.rfc',
+                'email',
                 'required'
             ],
             'citas.fecha_de_cita' => [

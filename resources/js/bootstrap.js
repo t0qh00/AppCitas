@@ -6,6 +6,10 @@ window._ = require('lodash');
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+try{
+    window.Dropzone = require('dropzone').default;
+}catch(e) {}
+
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

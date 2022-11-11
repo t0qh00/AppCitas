@@ -30,8 +30,8 @@ class Index extends Component
         return view('livewire.citas-mantenimiento.index', compact('citas'));
     }
 
-    public function eliminarCita($id){
-        $cita = Citas::where('id',$id)->first();
+    public function eliminarCita(){
+        $cita = Citas::where('id',$this->citaAEliminar)->first();
         $cita->delete();
         $this->hidden = 'hidden';
         $this->prueba = true;
@@ -40,7 +40,7 @@ class Index extends Component
 
     public function openModal($id){
         $this->hidden = '';
-        $this->citaAEliminar = Citas::where('id',$id)->first();
+        $this->citaAEliminar = $id;
     }
 
     public function closeModal(){

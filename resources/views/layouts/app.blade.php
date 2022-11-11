@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!--<script src="{ { asset('js/app.js') }}" defer></script>-->
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -36,6 +38,11 @@
                     Citas
                 </a>
                 <a href="/home">Mantenimiento de citas</a>
+                <a href="/expediente">Expedientes</a>
+                <a href="/notas">Notas</a>
+                <a href="/#">Pruebas psicológicas</a>
+                <a href="/#">Asesorías</a>
+                <a href="/#">Charlas</a>
                 @endguest
             </div>
             <div class="dropdown">
@@ -73,8 +80,10 @@
             @yield('content')
         </main>
     </div>
+    <script src="{{ asset('js/app.js') }}"></script>
     @livewireScripts
     @yield('scripts')
+    @stack('scripts')
     @method('scripts')
 </body>
 

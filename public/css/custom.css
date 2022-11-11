@@ -109,7 +109,6 @@ ul {
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   }
@@ -117,7 +116,7 @@ ul {
   /* Modal Content/Box */
   .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 10% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
     width: 40%; /* Could be more or less, depending on screen size */
@@ -248,6 +247,20 @@ ul {
         display: flex;
         justify-content: center;
       }
+
+    #container {
+        width: 1000px;
+        margin: 20px auto;
+    }
+    .ck-editor__editable[role="textbox"] {
+        /* editing area */
+        min-height: 200px;
+    }
+    .ck-content .image {
+        /* block images */
+        max-width: 80%;
+        margin: 20px auto;
+    }
 
       @media only screen and (max-width: 600px) {
         .customGird{

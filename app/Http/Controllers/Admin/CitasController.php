@@ -13,4 +13,7 @@ class CitasController extends Controller
     public function reserva(){
         return view('admin.reservaCompletada.index');
     }
+    public function datos($datos){
+        return view('admin.citasDisponibles.datos-basicos');
+    }
 }

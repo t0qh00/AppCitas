@@ -44,33 +44,14 @@
 
         <div {{$hidden}} class="modal" id="deleteModal">
             <div class="modal-content" style="text-align: center;">
-                @if ($citaAEliminar)
-                    <h3>Desea eliminar la cita:</h3>
-                    <table class="table-custom">
-                        <tbody>
-                            <tr>
-                                <td><b><label for="name">Nombre:</label></b></td>
-                                <td><label for="">{{$citaAEliminar->nombre}}</label></td>
-                            </tr>
-                            <tr>
-                                <td><b><label for="fecha">Fecha:</label></b></td>
-                                <td><label for="">{{$citaAEliminar->fecha_de_cita}}</label></td>
-                            </tr>
-                            <tr>
-                                <td><b><label for="hora">Hora:</label></b></td>
-                                <td><label for="">{{$citaAEliminar->hora_entrada}} - {{$citaAEliminar->hora_salida}}</label></td>
-                            </tr>
-
-                        </tbody>
-                    </table>
+                    <h3>Desea eliminar la cita?</h3>
                     <br>
-                    <button class="button-citas-delete" onclick="deleteCita({{$citaAEliminar->id}})">
+                    <button class="button-citas-delete" onclick="deleteCita({{$citaAEliminar}})">
                         Eliminar
                     </button>
                     <button class="button-citas-custom" onclick="closeModal()">
                         Cancelar
                     </button>
-                @endif
             </div>
         </div>
     </div>
@@ -79,7 +60,7 @@
 @section('scripts')
 <script>
     function deleteCita($id){
-        window.livewire.emit('eliminarCita',$id);
+        window.livewire.emit('eliminarCita');
     }
     function openModal($id){
         var modal = document.getElementById("deleteModal");
