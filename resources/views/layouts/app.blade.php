@@ -40,9 +40,9 @@
                 <a href="/home">Mantenimiento de citas</a>
                 <a href="/expediente">Expedientes</a>
                 <a href="/notas">Notas</a>
-                <a href="/#">Pruebas psicológicas</a>
-                <a href="/#">Asesorías</a>
-                <a href="/#">Charlas</a>
+                <a href="/pruebas-psicologicas">Pruebas psicológicas</a>
+                <a href="/asesorias">Asesorías</a>
+                <a href="/charlas">Charlas</a>
                 @endguest
             </div>
             <div class="dropdown">

@@ -6,6 +6,9 @@ use App\Http\Controllers\Admin\CitasMantenimientoController;
 use App\Http\Controllers\Admin\NotasController;
 use App\Http\Controllers\Admin\PersonaController;
 use App\Http\Controllers\Admin\CarpetasController;
+use App\Http\Controllers\Admin\AsesoriasController;
+use App\Http\Controllers\Admin\CharlasController;
+use App\Http\Controllers\Admin\PruebasPsicologicasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +35,12 @@ Route::get('/crear-paciente', [App\Http\Controllers\Admin\PersonaController::cla
 
 Route::get('/expediente/{id?}', [App\Http\Controllers\Admin\CarpetasController::class, 'index'])->name('carpetaIndex');
 Route::post('/expediente/media', [CarpetasController::class, 'storeMedia'])->name('carpetaStoreMedia');
+
+Route::get('/asesorias', [App\Http\Controllers\Admin\AsesoriasController::class, 'index']);
+
+Route::get('/charlas', [App\Http\Controllers\Admin\CharlasController::class, 'index']);
+
+Route::get('/pruebas-psicologicas', [App\Http\Controllers\Admin\PruebasPsicologicasController::class, 'index']);
 
 Auth::routes();
 
