@@ -15,6 +15,14 @@ class Notas extends Component
     public $hiddenFolder = 'hidden';
     public $pacienteAEliminar;
 
+    public function mount(){
+        $notasExist = Carpeta::where('nombre','PrincipalCarpetaNotas')->pluck('id')->first();
+        if(!$notasExist){
+            $newNotas = New Carpeta();
+            $newNotas->nombre = 'PrincipalCarpetaNotas';
+            $newNotas->save();
+        }
+    }
 
     public function render()
     {

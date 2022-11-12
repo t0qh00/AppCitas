@@ -43,12 +43,12 @@
 
     <!--<div>
         <div>
-            <button class="button-citas-custom" onclick="openModal({{$persona->id}},'carpeta')">
+            <button class="button-citas-custom" onclick="openModal({ {$persona->id}},'carpeta')">
                 Crear carpeta
             </button>
         </div>
 
-        <div {{$hiddenFolder}} class="modal" id="deleteModal">
+        <div { {$hiddenFolder}} class="modal" id="deleteModal">
             <div class="modal-content" style="text-align: center;">
                     <h3>Desea crear una carpeta?</h3>
                     <br>

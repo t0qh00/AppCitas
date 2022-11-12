@@ -8,18 +8,21 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Index extends Component
 {
-
     public array $mediaToRemove = [];
 
     public array $mediaCollections = [];
 
-    protected $listeners = ['crearNuevaCarpeta','sync'];
+    protected $listeners = ['sync','openModal','closeModal'];
 
     public $idPadre;
 
     public $parent;
 
     public $collectionName;
+
+    public $nombreDeCarpeta;
+
+    public $hidden = "hidden";
 
     public function addMedia($media): void{
         $this->mediaCollections[$media['collection_name']][] = $media;
@@ -38,7 +41,7 @@ class Index extends Component
         if($padreId != null){
             $this->idPadre = $padreId;
             $this->parent = Carpeta::where('id',$padreId)->first();
-            $this->collectionName = $this->parent->nombre.'-collection-'.$padreId;
+            $this->collectionName = "archivos";
         }
     }
     public function render()
@@ -57,14 +60,31 @@ class Index extends Component
     }
 
     public function crearNuevaCarpeta(){
+        $this->closeModal();
         $carpeta = new Carpeta();
-        $carpeta->nombre = 'Carpeta4';
+        $carpeta->nombre = $this->nombreDeCarpeta;
         $carpeta->id_padre = $this->idPadre;
         $carpeta->save();
     }
 
     public function sync(){
         $this->syncMedia();
+        $this->dispatchBrowserEvent('refresh-page');
     }
 
+    public function deleteMedia($idMedia){
+        Media::whereIn('id', $idMedia)->delete();
+    }
+
+    public function openModal(){
+        $this->hidden = '';
+    }
+
+    public function closeModal(){
+        $this->hidden = 'hidden';
+    }
+
+    public function delete($idCarpeta){
+        Carpeta::where('id',$idCarpeta)->delete();
+    }
 }

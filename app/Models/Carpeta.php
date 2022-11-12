@@ -41,7 +41,7 @@ class Carpeta extends Model implements HasMedia
 
     public function getIconAttribute()
     {
-        return $this->getMedia('CarpetaPadre-collection-1')->map(function ($item) {
+        return $this->getMedia('archivos')->map(function ($item) {
             $media = $item->toArray();
             $media['url'] = $item->getUrl();
             if ($item->getUrl('thumbnail')) {
