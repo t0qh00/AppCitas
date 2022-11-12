@@ -27,11 +27,14 @@
         <div class="folders-grid">
             @foreach ($this->parent->icon as $key => $entry)
                 <div class="card" style="text-align: center; padding: 1rem;">
-                    <u> <a class="link-photo" href="{{ $entry['url'] }}">
+                    <u> <a class="link-photo" href="{{ $entry['url'] }}" target="_blank">
                             {{ $entry['file_name'] }}
                         </a> </u>
                     <br>
-                    <a class="button-citas-delete" wire:click="deleteMedia({{ $entry['id'] }})">Eliminar</a>
+                    <a class="button-citas-custom" href="{{ $entry['url'] }}" download>
+                        Descargar
+                    </a>
+                    <a class="button-citas-delete" wire:click="deleteMedia('{{ $entry['uuid'] }}')">Eliminar</a>
                 </div>
             @endforeach
         </div>

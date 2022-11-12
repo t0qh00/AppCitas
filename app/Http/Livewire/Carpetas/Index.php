@@ -72,8 +72,9 @@ class Index extends Component
         $this->dispatchBrowserEvent('refresh-page');
     }
 
-    public function deleteMedia($idMedia){
-        Media::whereIn('id', $idMedia)->delete();
+    public function deleteMedia($uuidMedia){
+        Media::where('uuid', $uuidMedia)->delete();
+        $this->dispatchBrowserEvent('refresh-page');
     }
 
     public function openModal(){
