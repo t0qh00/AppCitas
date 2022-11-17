@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Carpeta;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 class CarpetasController extends Controller
 {
@@ -35,5 +36,8 @@ class CarpetasController extends Controller
         $media = $model->addMediaFromRequest('file')->toMediaCollection($request->input('collection_name'));
         $media->wasRecentlyCreated = true;
         return response()->json(compact('media'), Response::HTTP_CREATED);
+    }
+    public function convertToWord(){
+        $processor = new TemplateProcessor();
     }
 }

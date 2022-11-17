@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Charlas;
+namespace App\Http\Livewire\Recursos;
 use App\Models\Carpeta;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -32,10 +32,10 @@ class Index extends Component
     }
 
     public function mount(){
-        $pruebasExist = Carpeta::where('nombre','PrincipalCarpetaCharlas')->pluck('id')->first();
+        $pruebasExist = Carpeta::where('nombre','PrincipalCarpetaRecursos')->pluck('id')->first();
         if(!$pruebasExist){
             $newPruebas = New Carpeta();
-            $newPruebas->nombre = 'PrincipalCarpetaCharlas';
+            $newPruebas->nombre = 'PrincipalCarpetaRecursos';
             $newPruebas->save();
             $this->idCarpeta = $newPruebas->id;
 
@@ -48,7 +48,7 @@ class Index extends Component
     {
         $carpeta = Carpeta::where('id',$this->idCarpeta)->first();
 
-        return view('livewire.charlas.index',compact('carpeta'));
+        return view('livewire.recursos.index',compact('carpeta'));
     }
 
     protected function syncMedia(): void
@@ -89,20 +89,4 @@ class Index extends Component
     public function delete($idCarpeta){
         Carpeta::where('id',$idCarpeta)->delete();
     }
-
-    public function get_nombre_dia($fecha){ // YYYY-mm-dd
-        $fechats = strtotime($fecha); //pasamos a timestamp
-     
-     //el parametro w en la funcion date indica que queremos el dia de la semana
-     //lo devuelve en numero 0 domingo, 1 lunes,....
-     switch (date('w', $fechats)){
-         case 0: return "Domingo"; break;
-         case 1: return "Lunes"; break;
-         case 2: return "Martes"; break;
-         case 3: return "Miercoles"; break;
-         case 4: return "Jueves"; break;
-         case 5: return "Viernes"; break;
-         case 6: return "Sabado"; break;
-     }
-     }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CarpetasController;
 use App\Http\Controllers\Admin\AsesoriasController;
 use App\Http\Controllers\Admin\CharlasController;
 use App\Http\Controllers\Admin\PruebasPsicologicasController;
+use App\Http\Controllers\Admin\RecursosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,8 @@ Route::get('/asesorias', [App\Http\Controllers\Admin\AsesoriasController::class,
 Route::get('/charlas', [App\Http\Controllers\Admin\CharlasController::class, 'index']);
 
 Route::get('/pruebas-psicologicas', [App\Http\Controllers\Admin\PruebasPsicologicasController::class, 'index']);
+
+Route::get('/recursos', [App\Http\Controllers\Admin\RecursosController::class, 'index']);
 
 Auth::routes();
 
