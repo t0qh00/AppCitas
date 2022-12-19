@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Citas;
 
 use App\Models\Citas;
+use App\Models\Settings;
 use App\Models\Persona;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -30,6 +31,7 @@ class CitasDisponibles extends Component
     public $dni;
     public $error;
     public $hidden = 'hidden';
+    public $actualDay;
 
     public function mount(Citas $citas)
     {
@@ -44,20 +46,27 @@ class CitasDisponibles extends Component
         $this->telefono = "";
         $this->nombre = "";
         $this->isOnline = 0;
+        $this->actualDay = $this->get_nombre_dia($this->selectedDate);
     }
 
     public function render()
     {
         $this->cargarCitasMañana();
         $this->cargarCitasTarde();
+        $this->actualDay = $this->get_nombre_dia($this->selectedDate);
         return view('livewire.citas.citas-disponibles');
     }
 
     public function cargarCitasMañana(){
         $this->citasMañana = [];
         $citasDelDia = Citas::where('fecha_de_cita',$this->selectedDate)->get();
+        $horas = Settings::first();
+        $horas = $horas[$this->actualDay];
+        $horas = str_replace('AM',"",$horas);
+        $horas = trim(str_replace('PM',"",$horas));
+        $horas = explode("-",$horas);
         $exist = 0;
-        for ($i=7; $i < 12; $i++) {
+        for ($i=$horas[0]; $i < 12; $i++) {
             for ($x=0; $x < Count($citasDelDia); $x++) {
                 if($i == $citasDelDia[$x]->hora_entrada){
                     $exist = 1;
@@ -73,8 +82,13 @@ class CitasDisponibles extends Component
     public function cargarCitasTarde(){
         $this->citasTarde = [];
         $citasDelDia = Citas::where('fecha_de_cita',$this->selectedDate)->get();
+        $horas = Settings::first();
+        $horas = $horas[$this->actualDay];
+        $horas = str_replace('AM',"",$horas);
+        $horas = trim(str_replace('PM',"",$horas));
+        $horas = explode("-",$horas);
         $exist = 0;
-        for ($y=1; $y < 4; $y++) {
+        for ($y=1; $y < $horas[1]; $y++) {
             for ($z=0; $z < Count($citasDelDia); $z++) {
                 if($y == $citasDelDia[$z]->hora_entrada){
                     $exist = 1;
@@ -135,6 +149,22 @@ class CitasDisponibles extends Component
     public function closeModal(){
         $this->hidden = 'hidden';
     }
+
+    public function get_nombre_dia($fecha){ // YYYY-mm-dd
+        $fechats = strtotime($fecha); //pasamos a timestamp
+
+     //el parametro w en la funcion date indica que queremos el dia de la semana
+     //lo devuelve en numero 0 domingo, 1 lunes,....
+     switch (date('w', $fechats)){
+         case 0: return "Domingo"; break;
+         case 1: return "Lunes"; break;
+         case 2: return "Martes"; break;
+         case 3: return "Miercoles"; break;
+         case 4: return "Jueves"; break;
+         case 5: return "Viernes"; break;
+         case 6: return "Sabado"; break;
+     }
+     }
 
     protected function rules(): array{
         return [

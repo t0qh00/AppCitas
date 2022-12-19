@@ -3,38 +3,39 @@
     <div class="folders-grid">
         @foreach ($carpetas as $carpeta)
             <div class="card" style="text-align: center; padding: 1rem;">
+                <div class="card-header">
+                    <a class="button-citas-delete" style="padding: 5px 10px" wire:click="delete({{ $carpeta->id }})"><i
+                            class="far fa-trash-alt"></i></a>
+                </div>
                 <div>
                     {{ $carpeta->nombre }}
                 </div>
                 <div style="padding: 1rem;">
-                    <a class="button-citas-custom" href="{{ route('carpetaIndex', $carpeta->id) }}">Ir a
-                        {{ $carpeta->nombre }}</a>
-                </div>
-                <div>
-                    <a class="button-citas-delete" wire:click="delete({{ $carpeta->id }})">Eliminar</a>
+                    <a class="button-citas-custom" href="{{ route('carpetaIndex', $carpeta->id) }}">Abrir</a>
                 </div>
             </div>
         @endforeach
     </div>
 
-    <div style="text-align: center; padding: 1rem;">
-        <button class="button-citas-custom" onclick="openModal()">
-            Crear carpeta
-        </button>
-    </div>
+
 
     @if ($collectionName != '')
         <div class="folders-grid">
             @foreach ($this->parent->icon as $key => $entry)
                 <div class="card" style="text-align: center; padding: 1rem;">
+                    <div class="card-header">
+                        <a class="button-citas-delete" style="padding: 5px 10px"
+                            wire:click="deleteMedia('{{ $entry['uuid'] }}')"><i class="far fa-trash-alt"></i></a>
+                    </div>
                     <u> <a class="link-photo" href="{{ $entry['url'] }}" target="_blank">
                             {{ $entry['file_name'] }}
                         </a> </u>
                     <br>
-                    <a class="button-citas-custom" href="{{ $entry['url'] }}" download>
-                        Descargar
-                    </a>
-                    <a class="button-citas-delete" wire:click="deleteMedia('{{ $entry['uuid'] }}')">Eliminar</a>
+                    <div style="text-align:right">
+                        <a class="button-citas-custom" style="padding: 5px 10px;" href="{{ $entry['url'] }}" download>
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
                 </div>
             @endforeach
         </div>
@@ -49,7 +50,9 @@
         </div>
 
     @endif
-
+    <a class="btn-flotante" onclick="openModal()">
+        +
+    </a>
     <div class="modal" id="FolderModal" {{ $hidden }}>
         <div div class="modal-content" style="text-align: center;">
             <h3><b>Nueva carpeta</b></h3>

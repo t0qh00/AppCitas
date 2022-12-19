@@ -15,6 +15,13 @@ class CreateSettings extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            $table->string('Lunes');
+            $table->string('Martes');
+            $table->string('Miercoles');
+            $table->string('Jueves');
+            $table->string('Viernes');
+            $table->string('Sabado');
+            $table->string('Domingo');
             $table->timestamps();
         });
     }

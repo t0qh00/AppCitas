@@ -7,6 +7,7 @@ use App\Models\Carpeta;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use PhpOffice\PhpWord\TemplateProcessor;
+use PhpOffice\PhpWord\PhpWord;
 
 class CarpetasController extends Controller
 {
@@ -39,5 +40,16 @@ class CarpetasController extends Controller
     }
     public function convertToWord(){
         $processor = new TemplateProcessor();
+    }
+
+    public function readWordDocument(){
+        $file = 'storage\app\public\25\prueba.docx';
+$phpWord = \PhpOffice\PhpWord\IOFactory::load($file);
+        $filePath = 'storage\app\public\25\prueba.docx';
+        $xslDomDocument = new \DOMDocument();
+$xslDomDocument->load($filePath);
+        $phpWord = new PhpWord();
+        $document = $phpWord->loadTemplate($filePath);
+        $text = $document->getBodyContent();
     }
 }

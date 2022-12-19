@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AsesoriasController;
 use App\Http\Controllers\Admin\CharlasController;
 use App\Http\Controllers\Admin\PruebasPsicologicasController;
 use App\Http\Controllers\Admin\RecursosController;
+use App\Http\Controllers\Admin\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,7 @@ Route::get('/crear-paciente', [App\Http\Controllers\Admin\PersonaController::cla
 
 Route::get('/expediente/{id?}', [App\Http\Controllers\Admin\CarpetasController::class, 'index'])->name('carpetaIndex');
 Route::post('/expediente/media', [CarpetasController::class, 'storeMedia'])->name('carpetaStoreMedia');
+Route::get('/test', [App\Http\Controllers\Admin\CarpetasController::class, 'readWordDocument'])->name('prueba');
 
 Route::get('/asesorias', [App\Http\Controllers\Admin\AsesoriasController::class, 'index']);
 
@@ -44,6 +46,9 @@ Route::get('/charlas', [App\Http\Controllers\Admin\CharlasController::class, 'in
 Route::get('/pruebas-psicologicas', [App\Http\Controllers\Admin\PruebasPsicologicasController::class, 'index']);
 
 Route::get('/recursos', [App\Http\Controllers\Admin\RecursosController::class, 'index']);
+
+Route::get('/settings', [App\Http\Controllers\Admin\SettingsController::class, 'index']);
+
 
 Auth::routes();
 
